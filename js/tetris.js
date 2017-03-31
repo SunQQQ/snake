@@ -23,7 +23,7 @@ document.onkeydown = function (e) {
     if (event.keyCode==40){dir=2;}// 下
     if (event.keyCode==32){
         blackspace = -blackspace;
-        myconsole(blackspace);
+        // myconsole(blackspace);
     }
 };
 // 初始化蛇
@@ -50,51 +50,57 @@ function newegg() {
 
 // 每次移动一下其实就是把蛇数组的第四个（头）换一个td，把第一个td（尾）颜色弄没，其余的td顺次前一下。
 function move(){
-    snake[0].style.backgroundColor = '#ffffff';
-    for(var o=0;o<snake.length-1;o++){//将蛇身数组依次前移，挤掉蛇尾  
-        snake[o] = snake[o+1];
-    }
-    if(dir==1){//如果是向上前行
-        snake[snake.length-1] = alltd[x-1][y];//任命新蛇头
-        x-=1;//改变蛇头坐标
-    }
-    if(dir==2){//同理如果向下前行
-        snake[snakelength-1] = alltd[x+1][y];
-        x+=1;//改变蛇头坐标
-    }
-    if(dir==3){//同理向左前行
-        snake[snakelength-1] = alltd[x][y-1];
-        y-=1;//改变蛇头坐标
-    }
-    if(dir==4){//同理向右前行
-        snake[snakelength-1] = alltd[x][y+1];y+=1;//改变蛇头坐标
-    }
-    snake[snake.length-1].style.backgroundColor= 'black';
-
-    /*判断撞墙*/
-    // myconsole('x='+x+' y='+y);
-    if(y==29||x<0||x==29||y==0){
+    if(y==30||y>30){
         clearInterval(init);
-    }
-    if(blackspace==1){
-        clearInterval(init);
-    }
+    }else {
+        snake[0].style.backgroundColor = '#ffffff';
 
-    /*当吃到一个蛋*/
-    myconsole(alltd);
-    // if(alltd[x][y] == egg){
-    if(snake[snakelength-1] == egg){
-        newegg();// 再生成一个
-        snakelength++;// 长度加一
-    }
+        console.log('一次');
 
-    /*当蛇头碰到自己*/
-    for(var i=0;i<snakelength;i++){
-        if(snake[snakelength-1]==alltd[x][y]){
-            alert['game over'];
+        if(blackspace==1){
+            clearInterval(init);
         }
+
+        for(var o=0;o<snake.length-1;o++){//将蛇身数组依次前移，挤掉蛇尾
+            snake[o] = snake[o+1];
+        }
+        if(dir==1){//如果是向上前行
+            snake[snake.length-1] = alltd[x-1][y];//任命新蛇头
+            x-=1;//改变蛇头坐标
+        }
+        if(dir==2){//同理如果向下前行
+            snake[snakelength-1] = alltd[x+1][y];
+            x+=1;//改变蛇头坐标
+        }
+        if(dir==3){//同理向左前行
+            snake[snakelength-1] = alltd[x][y-1];
+            y-=1;//改变蛇头坐标
+        }
+        if(dir==4){//同理向右前行
+            snake[snakelength-1] = alltd[x][y+1];
+            y+=1;//改变蛇头坐标
+        }
+        snake[snake.length-1].style.backgroundColor= 'black';
+
+        /*当吃到一个蛋*/
+        // myconsole(alltd);
+        // if(alltd[x][y] == egg){
+        if(snake[snakelength-1] == egg){
+            newegg();// 再生成一个
+            snakelength++;// 长度加一
+        }
+
+        /*判断撞墙*/
+        myconsole('x='+x+' y='+y);
+
+        /*当蛇头碰到自己*/
+        for(var i=0;i<snakelength;i++){
+            if(snake[snakelength-1]==alltd[x][y]){
+                alert['game over'];
+            }
+        }
+        /*判断蛇头碰到自己*/
     }
-    /*判断蛇头碰到自己*/
 }
 
 
