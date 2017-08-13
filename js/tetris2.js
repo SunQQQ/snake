@@ -5,7 +5,8 @@ var tds = [],
     egg,
     eggNum=0,
     timer,
-    gameSpeed = 200;
+    gameSpeed = 200,
+    
     headerTr=0,
     headertd=0;
 
@@ -187,8 +188,10 @@ function makeEgg() {
     }else if(eggNum==4){
         gameSpeed-=30;
     }else if(eggNum==6){
-        gameSpeed-=50;
+        gameSpeed-=30;
     }else if(eggNum==8) {
         gameSpeed -= 30;
+    }else if(eggNum==8) {
+        gameSpeed -= 20;
     }
 }
