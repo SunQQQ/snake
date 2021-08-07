@@ -1,9 +1,11 @@
 /**
- * Created by OnlyMid_sq on 2017/3/9.
+ * author: sunquan 2017/3/9.
+ *
+ * 本文件用js语言实现一个贪吃蛇游戏；
  */
-var tds = [],
+var tds = [],         //
     egg,
-    eggNum=0,
+    eggNum = 0,
     timer,
     gameSpeed = 200,
     headerTr=0,
