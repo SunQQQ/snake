@@ -8,25 +8,27 @@ var tds = [],         //
     eggNum = 0,
     timer,
     gameSpeed = 200,
-    headerTr=0,
-    headertd=0,
+    headerTr = 0,
+    headertd = 0,
     preDirection;
 
 
 /*画棋盘 把所有td装到一个二维数组里*/
 var chessboard = document.getElementById('chessboard');
 for(var i=0;i<30;i++){
-    var thistr = chessboard.appendChild(document.createElement('tr'));
+    // 插入一个行元素，appendChild还返回插入的节点
+    var thistr = chessboard.appendChild(document.createElement('tr')); //
     var thistds = [];
+    // 给行元素插入30个列元素
     for(var k=0;k<30;k++){
         thistds[k] = thistr.appendChild(document.createElement('td'));
     }
+    // 这样，数组tds的每一个值，又都是一个数组。通过两层下标就可以准确的取到对应的td块
     tds[i] =  thistds;
 }
 
 //画蛇身体
-function Snake() {
-}
+function Snake() {}
 Snake.prototype = {
     snakeBody:[],
     turn:function () {
@@ -65,7 +67,8 @@ Snake.prototype = {
                 makeEgg();
                 snake.snakeBody[0].style.backgroundColor = "black";
             }else {
-                this.snakeBody[0].style.backgroundColor = "white";
+                this.snakeBody[0].style.backgroundColor = "#cbcbcb";
+                this.snakeBody[0].style.border = "1px solid #cbcbcb";
                 this.snakeBody.shift();
             }
 
@@ -73,7 +76,9 @@ Snake.prototype = {
 
 
             this.snakeBody[this.snakeBody.length-1].style.backgroundColor = "black";
+            this.snakeBody[this.snakeBody.length-1].style.border = "1px solid black";
         }
+
         timer = setInterval(function () {
             snake.turn(direction);
         },gameSpeed);
@@ -81,8 +86,9 @@ Snake.prototype = {
 }
 var snake = new Snake();
 snake.snakeBody.push(tds[0][0]);
-snake.snakeBody[0].style.backgroundColor = "black";
-makeEgg();
+
+makeEgg('black');
+makeEgg('red');
 
 window.addEventListener("keydown",function (e) {
     if(e.keyCode=="40"){
@@ -96,9 +102,14 @@ window.addEventListener("keydown",function (e) {
     }
 });
 
-function makeEgg() {
+
+/** 随机的渲染一个方块
+ * color:蛋的背景色，和蛋的边框颜色
+ */
+function makeEgg(color) {
     egg = tds[parseInt(Math.random()*30)][parseInt(Math.random()*30)];
-    egg.style.backgroundColor = "red";
+    egg.style.backgroundColor = color;
+    egg.style.border = "1px solid " + color;
 
     document.getElementsByClassName("warm")[0].innerHTML = "你吃了"+eggNum+"个蛋";
 
