@@ -1,20 +1,28 @@
+body{
+    background-color: rgb(103,120,104);
+}
+table{
+    background-color: rgb(103,120,104);
+    border-right: 2px solid black;
+}
 tr{
     border:1px solid red;
     /*border-collapse:collapse;*/
 }
 td{
-    width:15px;
-    height:15px;
-    border:1px solid #cbcbcb;
-    box-shadow: 0px 0px 0px 2px white inset;
-    background-color: #cbcbcb;
+    width:11px;
+    height:11px;
+    border:3px solid rgb(88, 104, 88);
+    box-shadow: 0px 0px 0px 3px rgb(103,120,104) inset;
+    background-color: rgb(88, 104, 88);
 }
 
 .content{
     vertical-align:middle;
     display: flex;
     margin: 80px auto 0;
-    width: 818px;
+    width: 812px;
+    border: 2px solid black;
 }
 
 #chessboard{
@@ -22,7 +30,6 @@ td{
 }
 
 .content .left{
-    border: 1px solid black;
     width: 180px;
     margin-right: 10px;
 }
@@ -30,9 +37,26 @@ td{
 .content .right{
     /*border: 1px solid black;*/
     width: 180px;
-    margin-left: 10px;
 }
 
 .rules{
-    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 2px solid black;
 }
+
+.rules:last-child{
+    border-bottom: 0;
+}
+
+.rules p{
+    text-indent: 25px;
+}
+
+.rules .score{
+    margin: 0 auto;
+    display: block;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+

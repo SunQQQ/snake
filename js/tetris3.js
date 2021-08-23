@@ -16,6 +16,7 @@ function Snake(para) {
   this.block = '';      // 染了色的方块
   this.timer = '';      // 初始一个计时器
   this.preDirection;
+  this.timeBegin = 0;
 }
 
 // 蛇的转向
@@ -47,17 +48,19 @@ Snake.prototype.turn = function () {
     clearInterval(that.timer);
     alert("已撞晕，game over");
     window.location.reload();
+    this.updateTime(false);
   } else if (this.biteMyself()) {
     clearInterval(that.timer);
     alert("咬自己了，game over");
+    this.updateTime(false);
     window.location.reload();
   } else {
     if (this.snakeBody[this.snakeBody.length - 1] == this.block) {
       this.createEgg();
       this.snakeBody[0].style.backgroundColor = "black";
     } else {
-      this.snakeBody[0].style.backgroundColor = "#cbcbcb";
-      this.snakeBody[0].style.border = "1px solid #cbcbcb";
+      this.snakeBody[0].style.backgroundColor = "rgb(88, 104, 88)";
+      this.snakeBody[0].style.border = "3px solid rgb(88, 104, 88)";
       this.snakeBody.shift();
     }
 
@@ -65,12 +68,16 @@ Snake.prototype.turn = function () {
 
 
     this.snakeBody[this.snakeBody.length - 1].style.backgroundColor = "black";
-    this.snakeBody[this.snakeBody.length - 1].style.border = "1px solid black";
+    this.snakeBody[this.snakeBody.length - 1].style.border = "3px solid black";
   }
 
   that.timer = setInterval(function () {
     that.turn(direction);
   }, that.gameSpeed);
+
+  if(that.timeBegin == 0){
+    that.updateTime(true);
+  }
 };
 
 /**
@@ -83,7 +90,7 @@ Snake.prototype.createRandomBlock = function (color) {
 
   this.block = this.tds[horizon][vertical];
   this.block.style.backgroundColor = color;
-  this.block.style.border = "1px solid " + color;
+  this.block.style.border = "3px solid " + color;
 
   return {
     horizon: horizon,
@@ -97,7 +104,7 @@ Snake.prototype.createRandomBlock = function (color) {
 Snake.prototype.createEgg = function () {
   this.createRandomBlock('red');
 
-  document.getElementsByClassName("warm")[0].innerHTML = "你吃了" + this.eggNum + "个蛋";
+  document.getElementsByClassName("score")[0].innerHTML = this.eggNum * 10;
 
   this.eggNum += 1;
 
@@ -141,9 +148,9 @@ Snake.prototype.drawChessBoard = function () {
   }
 }
 
+// 监听上下左右四个按键
 Snake.prototype.listenKeyDown = function () {
   var that = this;
-  // 监听上下左右四个按键
   window.addEventListener("keydown", function (e) {
     if (e.keyCode == "40") {
       that.turn("down");
@@ -155,6 +162,21 @@ Snake.prototype.listenKeyDown = function () {
       that.turn("up");
     }
   });
+};
+
+// 游戏计时
+Snake.prototype.updateTime = function (close) {
+  var that = this,
+  timeWatch = '';
+
+  if(close){
+    timeWatch = window.setInterval(function () {
+      that.timeBegin += 1;
+      document.getElementsByClassName('time')[0].innerHTML = that.timeBegin;
+    },1000);
+  }else {
+    window.clearInterval(timeWatch);
+  }
 }
 
 init();
