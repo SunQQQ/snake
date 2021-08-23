@@ -230,13 +230,6 @@ Snake.prototype.leftRightAnimation = function(snake){
       }
     }else {
       window.clearInterval(leftRightInter);
-
-      // snake.listenKeyDown(); //监听上下左右按钮
-      // var firstBody = snake.createRandomBlock('black');// 随机上色一个方块
-      // snake.headerTr = firstBody.horizon;// 初始化蛇头位置
-      // snake.headertd = firstBody.vertical;
-      // snake.snakeBody.push(snake.tds[snake.headerTr][snake.headertd]);//将蛇头放入蛇身
-      // snake.createEgg();// 创建一个蛋
     }
   },50);
 }
@@ -262,5 +255,5 @@ function init() {
     snake.snakeBody.push(snake.tds[snake.headerTr][snake.headertd]);//将蛇头放入蛇身
     snake.createEgg();// 创建一个蛋
 
-  },3000);
+  },3300);
 }
