@@ -15,8 +15,8 @@ function Snake(para) {
   this.tds = [];        // 装整个棋盘的方块
   this.block = '';      // 染了色的方块
   this.timer = '';      // 初始一个计时器
-  this.preDirection;
-  this.timeBegin = 0;
+  this.preDirection;    //第一个蛇头的方向
+  this.timeBegin = 0;   //游戏计时变量
 }
 
 // 蛇的转向
@@ -71,7 +71,7 @@ Snake.prototype.turn = function () {
     this.snakeBody[this.snakeBody.length - 1].style.border = "3px solid black";
   }
 
-  that.timer = setInterval(function () {
+  that.timer = (function () {
     that.turn(direction);
   }, that.gameSpeed);
 
@@ -179,6 +179,68 @@ Snake.prototype.updateTime = function (close) {
   }
 }
 
+// 游戏开始的上下动画
+Snake.prototype.upDownAnimation = function(snake){
+  var that = this,
+  trNum = -1,
+  tdNum = 30
+
+  // 上下动画
+  var upDownInter = window.setInterval(function () {
+    trNum += 1;
+    tdNum -= 1;
+
+    if(trNum < 30){
+      for(var i=0;i<29;i= i+2){
+        that.tds[trNum][i].style.backgroundColor = 'black';
+        that.tds[trNum][i].style.border = '3px solid black';
+      }
+
+      for(var t=29;t>-1;t= t-2){
+        that.tds[tdNum][t].style.backgroundColor = 'black';
+        that.tds[tdNum][t].style.border = '3px solid black';
+      }
+    }else {
+      window.clearInterval(upDownInter);
+      that.leftRightAnimation(snake);
+    }
+  },50);
+}
+
+// 游戏开始的左右动画
+Snake.prototype.leftRightAnimation = function(snake){
+  var that = this,
+    leftRightTdStart = -1,
+    leftRightTdEnd = 30;
+
+  // 左右动画
+  var leftRightInter = window.setInterval(function () {
+    leftRightTdStart += 1;
+    leftRightTdEnd -= 1;
+
+    if(leftRightTdStart < 30){
+      for(var i=0;i<29;i= i+2){
+        that.tds[i][leftRightTdStart].style.backgroundColor = 'rgb(88, 104, 88)';
+        that.tds[i][leftRightTdStart].style.border = '3px solid rgb(88, 104, 88)';
+      }
+
+      for(var t=29;t>-1;t= t-2){
+        that.tds[t][leftRightTdEnd].style.backgroundColor = 'rgb(88, 104, 88)';
+        that.tds[t][leftRightTdEnd].style.border = '3px solid rgb(88, 104, 88)';
+      }
+    }else {
+      window.clearInterval(leftRightInter);
+
+      // snake.listenKeyDown(); //监听上下左右按钮
+      // var firstBody = snake.createRandomBlock('black');// 随机上色一个方块
+      // snake.headerTr = firstBody.horizon;// 初始化蛇头位置
+      // snake.headertd = firstBody.vertical;
+      // snake.snakeBody.push(snake.tds[snake.headerTr][snake.headertd]);//将蛇头放入蛇身
+      // snake.createEgg();// 创建一个蛋
+    }
+  },50);
+}
+
 init();
 
 function init() {
@@ -187,13 +249,16 @@ function init() {
   });
 
   snake.drawChessBoard();// 画棋盘
-  snake.listenKeyDown(); //监听上下左右按钮
 
-  var firstBody = snake.createRandomBlock('black');// 随机上色一个方块
-  snake.headerTr = firstBody.horizon;// 初始化蛇头位置
-  snake.headertd = firstBody.vertical;
+  // 欢迎动画
+  snake.upDownAnimation(snake);
 
-  snake.snakeBody.push(snake.tds[snake.headerTr][snake.headertd]);//将蛇头放入蛇身
-
-  snake.createEgg();// 创建一个蛋
+  window.setTimeout(function () {
+    snake.listenKeyDown(); //监听上下左右按钮
+    var firstBody = snake.createRandomBlock('black');// 随机上色一个方块
+    snake.headerTr = firstBody.horizon;// 初始化蛇头位置
+    snake.headertd = firstBody.vertical;
+    snake.snakeBody.push(snake.tds[snake.headerTr][snake.headertd]);//将蛇头放入蛇身
+    snake.createEgg();// 创建一个蛋
+  },3000);
 }
