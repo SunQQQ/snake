@@ -71,7 +71,7 @@ Snake.prototype.turn = function () {
     this.snakeBody[this.snakeBody.length - 1].style.border = "3px solid black";
   }
 
-  that.timer = (function () {
+  that.timer = window.setInterval(function () {
     that.turn(direction);
   }, that.gameSpeed);
 
@@ -254,11 +254,13 @@ function init() {
   snake.upDownAnimation(snake);
 
   window.setTimeout(function () {
+
     snake.listenKeyDown(); //监听上下左右按钮
     var firstBody = snake.createRandomBlock('black');// 随机上色一个方块
     snake.headerTr = firstBody.horizon;// 初始化蛇头位置
     snake.headertd = firstBody.vertical;
     snake.snakeBody.push(snake.tds[snake.headerTr][snake.headertd]);//将蛇头放入蛇身
     snake.createEgg();// 创建一个蛋
+
   },3000);
 }
