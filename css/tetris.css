@@ -71,11 +71,11 @@ td{
     bottom: 0;
     background-color: grey;
 
-    display: flex;
+    display: none;
     align-items: center;
 }
 .wrapper .dialog-box{
-    width: 500px;
+    width: 420px;
     background-color: #fff;
     border: 1px solid #ebeef5;
     margin: 0 auto;
@@ -91,7 +91,7 @@ td{
 }
 
 .box-content{
-    padding: 10px 0;
+    padding: 10px 0 18px
     color: #606266;
     font-size: 14px;
 }
@@ -117,4 +117,7 @@ td{
     padding: 9px 15px;
     color: #606266;
     border: 1px solid #dcdfe6;
+    outline: none;
+    line-height: 1;
+    font-size: 12px;
 }
