@@ -1,8 +1,8 @@
 /**
- * author: sunquan 2017/3/9.
- *
- * 本文件用js语言实现一个贪吃蛇游戏；
- */
+* author: sunquan 2017/3/9.
+*
+* 本文件用js语言实现一个贪吃蛇类；
+*/
 function Snake(para) {
   // 在新建蛇时可以修改的参数
   this.gameSpeed = para.gameSpeed; //游戏开场时的速度
@@ -167,7 +167,7 @@ Snake.prototype.listenKeyDown = function () {
 // 游戏计时
 Snake.prototype.updateTime = function (close) {
   var that = this,
-  timeWatch = '';
+    timeWatch = '';
 
   if(close){
     timeWatch = window.setInterval(function () {
@@ -182,8 +182,8 @@ Snake.prototype.updateTime = function (close) {
 // 游戏开场的上下动画
 Snake.prototype.upDownAnimation = function(callback){
   var that = this,
-  trNum = -1,
-  tdNum = 30
+    trNum = -1,
+    tdNum = 30
 
   // 上下动画
   var upDownInter = window.setInterval(function () {
@@ -235,23 +235,4 @@ Snake.prototype.leftRightAnimation = function(callback){
   },50);
 }
 
-// 项目初始化
-Snake.prototype.init = function (snakeObject){
-  document.getElementsByClassName('wrapper')[0].style.display = 'flex';
 
-  snakeObject.drawChessBoard();// 画棋盘
-  // 欢迎动画
-  // snakeObject.upDownAnimation(function (){
-    // snakeObject.listenKeyDown(); //监听上下左右按钮
-    // var firstBody = snakeObject.createRandomBlock('black');// 随机上色一个方块
-    // snakeObject.headerTr = firstBody.horizon;// 初始化蛇头位置
-    // snakeObject.headertd = firstBody.vertical;
-    // snakeObject.snakeBody.push(snakeObject.tds[snakeObject.headerTr][snakeObject.headertd]);//将蛇头放入蛇身
-    // snakeObject.createEgg();// 创建一个蛋
-  // });
-}
-
-var snake = new Snake({
-    gameSpeed: 200
-  });
-snake.init(snake);
