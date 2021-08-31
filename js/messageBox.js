@@ -33,6 +33,7 @@ MessageBox.prototype.openMessageBox = function () {
   document.getElementsByClassName('wrapper')[0].style.display = 'flex';
 
   // 请求成绩列表接口，获取游戏记录条数。
+  this.getData();
 
   // 根据返回数据，拼接成默认用户名：比如 游客1
 
@@ -42,22 +43,16 @@ MessageBox.prototype.openMessageBox = function () {
 
 // 封装请求数据的方法，实现重用
 MessageBox.prototype.getData = function (para,callback) {
-  //创建异步对象
   var xhr = new XMLHttpRequest();
-  //设置请求的类型及url
-  //post请求一定要添加请求头才行不然会报错
-  xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  xhr.open('post', '02.php' );
-  //发送请求
-  xhr.send('name=fox&age=18');
-  xhr.onreadystatechange = function () {
-    // 这步为判断服务器是否正确响应
-    if (xhr.readyState == 4 && xhr.status == 200) {
+  xhr.open("POST", 'http://39.104.22.73:79/ScoreRead/foreend', true);
+  // 添加http头，发送信息至服务器时内容编码类型
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
       console.log(xhr.responseText);
-      callback(xhr.responseText);
     }
   };
-
+  xhr.send();
 };
 
 MessageBox.prototype.updateScore = function () {
