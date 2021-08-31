@@ -46,6 +46,19 @@ td{
     border-bottom: 2px solid black;
 }
 
+.rules span:first-child{
+    font-size: 16px;
+}
+
+.rules .unit{
+    font-size: 6px;
+}
+
+.rules .title{
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .rules:last-child{
     border-bottom: 0;
 }
@@ -69,7 +82,7 @@ td{
     right: 0;
     top:0;
     bottom: 0;
-    /*background-color: grey;*/
+    background-color: grey;
 
     display: none;
     align-items: center;
@@ -95,6 +108,7 @@ td{
     position: absolute;
     right: 15px;
     top: 15px;
+    cursor:pointer;
 }
 
 .head-button img{
@@ -136,6 +150,7 @@ td{
     background-color: #fff;
     border: 1px solid #dcdfe6;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 .conform{
