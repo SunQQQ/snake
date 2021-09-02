@@ -33,7 +33,9 @@ MessageBox.prototype.openMessageBox = function () {
   document.getElementsByClassName('wrapper')[0].style.display = 'flex';
 
   // 请求成绩列表接口，获取游戏记录条数。
-  this.getData();
+  this.myAjax('',function (data){
+    console.log('data',data);
+  });
 
   // 根据返回数据，拼接成默认用户名：比如 游客1
 
@@ -42,17 +44,17 @@ MessageBox.prototype.openMessageBox = function () {
 };
 
 // 封装请求数据的方法，实现重用
-MessageBox.prototype.getData = function (para,callback) {
+MessageBox.prototype.myAjax = function (para,callback) {
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", 'http://39.104.22.73:79/ScoreRead/foreend', true);
+  xhr.open("POST", 'http://39.104.22.73:8081/ScoreRead/foreend', true);
   // 添加http头，发送信息至服务器时内容编码类型
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.send();
   xhr.onreadystatechange = function() {
     if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
-      console.log(xhr.responseText);
+      callback(xhr.responseText);
     }
   };
-  xhr.send();
 };
 
 MessageBox.prototype.updateScore = function () {

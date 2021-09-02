@@ -2,14 +2,26 @@ var messageBox = new MessageBox();
 
 messageBox.init();
 
+// 游戏结束后的处理逻辑
+var OverDeal = function (Score){
+  var userName = localStorage.getItem('snakeUserName');
+  console.log('score',Score);
+  // messageBox.myAjax({},function (){
+  //
+  // })
+};
+
 var snakeObject = new Snake({
-  gameSpeed: 200
+  gameSpeed: 200,
+  gameOver: OverDeal
 });
 
 snakeObject.drawChessBoard();// 画棋盘
+// messageBox.openMessageBox();
 
 snakeObject.upDownAnimation(function (){   // 欢迎动画
   messageBox.openMessageBox();
+  snakeObject.beginGame();
 
   snakeObject.listenKeyDown(); //监听上下左右按钮
   var firstBody = snakeObject.createRandomBlock('black');// 随机上色一个方块
@@ -17,4 +29,7 @@ snakeObject.upDownAnimation(function (){   // 欢迎动画
   snakeObject.headertd = firstBody.vertical;
   snakeObject.snakeBody.push(snakeObject.tds[snakeObject.headerTr][snakeObject.headertd]);//将蛇头放入蛇身
   snakeObject.createEgg();// 创建一个蛋
+
+
+  snakeObject.updateTime(true);
 });
