@@ -6,6 +6,7 @@
 function Snake(para) {
   // 在新建蛇时可以修改的参数
   this.gameSpeed = para.gameSpeed; //游戏开场时的速度
+  this.gameOver = para.gameOver;
 
   // 初始化的参数
   this.snakeBody = [];  // 蛇的身体
@@ -15,45 +16,58 @@ function Snake(para) {
   this.tds = [];        // 装整个棋盘的方块
   this.block = '';      // 染了色的方块
   this.timer = '';      // 初始一个计时器
-  this.preDirection;    //第一个蛇头的方向
-  this.timeBegin = 0;   //游戏计时变量
+  this.preDirection;    // 第一个蛇头的方向
+  this.timeBegin = 0;   // 游戏计时变量
+  this.timeWatch = '';  // 统计游戏持续时间
+  this.direction = '';
 }
 
 // 蛇的转向
 Snake.prototype.turn = function () {
-  var that = this,
-    direction = arguments[0];
+  console.log('turn');
+  var that = this;
+
+  that.direction = arguments[0];
 
   // 限制回退操作
-  if ((that.preDirection == "left" && that.direction == "right") || (that.preDirection == "right" && direction == "left")) {
+  if ((that.preDirection == "left" && that.direction == "right") || (that.preDirection == "right" && that.direction == "left")) {
     return;
-  } else if ((that.preDirection == "up" && direction == "down") || (that.preDirection == "down" && direction == "up")) {
+  } else if ((that.preDirection == "up" && that.direction == "down") || (that.preDirection == "down" && that.direction == "up")) {
     return;
   }
-  that.preDirection = direction;
+  that.preDirection = that.direction;
 
-  clearInterval(that.timer);
-
-  if (direction == "left") {
+  if (that.direction == "left") {
     this.headertd -= 1;
-  } else if (direction == "right") {
+  } else if (that.direction == "right") {
     this.headertd += 1;
-  } else if (direction == "up") {
+  } else if (that.direction == "up") {
     this.headerTr -= 1;
-  } else if (direction == "down") {
+  } else if (that.direction == "down") {
     this.headerTr += 1;
   }
 
   if (this.headertd > 29 || this.headerTr > 29 || this.headertd < 0 || this.headerTr < 0) {
-    clearInterval(that.timer);
-    alert("已撞晕，game over");
-    window.location.reload();
+    window.clearInterval(that.timer);
+    // alert("已撞晕，game over");
+    // window.location.reload();
     this.updateTime(false);
+
+    that.gameOver({
+      score:that.eggNum * 10,
+      time:that.timeBegin + 's'
+    });
   } else if (this.biteMyself()) {
     clearInterval(that.timer);
     alert("咬自己了，game over");
     this.updateTime(false);
-    window.location.reload();
+
+
+    window.clearInterval(that.timer);
+    // alert("已撞晕，game over");
+    // window.location.reload();
+    this.updateTime(false);
+    that.gameOver(that.eggNum * 10);
   } else {
     if (this.snakeBody[this.snakeBody.length - 1] == this.block) {
       this.createEgg();
@@ -69,14 +83,6 @@ Snake.prototype.turn = function () {
 
     this.snakeBody[this.snakeBody.length - 1].style.backgroundColor = "black";
     this.snakeBody[this.snakeBody.length - 1].style.border = "3px solid black";
-  }
-
-  that.timer = window.setInterval(function () {
-    that.turn(direction);
-  }, that.gameSpeed);
-
-  if(that.timeBegin == 0){
-    that.updateTime(true);
   }
 };
 
@@ -116,8 +122,8 @@ Snake.prototype.createEgg = function () {
     this.gameSpeed -= 30;
   } else if (this.eggNum == 8) {
     this.gameSpeed -= 30;
-  } else if (this.eggNum == 8) {
-    this.gameSpeed -= 20;
+  } else if (this.eggNum == 10) {
+    this.gameSpeed -= 30;
   }
 }
 
@@ -166,16 +172,17 @@ Snake.prototype.listenKeyDown = function () {
 
 // 游戏计时
 Snake.prototype.updateTime = function (close) {
-  var that = this,
-    timeWatch = '';
+  var that = this;//给游戏更新持续时间;
 
   if(close){
-    timeWatch = window.setInterval(function () {
+    that.timeWatch = window.setInterval(function () {
       that.timeBegin += 1;
       document.getElementsByClassName('time')[0].innerHTML = that.timeBegin;
     },1000);
   }else {
-    window.clearInterval(timeWatch);
+    console.log('游戏计时停止');
+    window.clearInterval(that.timeWatch);
+    that.timeWatch = 0;
   }
 }
 
@@ -233,6 +240,13 @@ Snake.prototype.leftRightAnimation = function(callback){
       callback();
     }
   },50);
+}
+
+Snake.prototype.beginGame = function (){
+  var that = this;
+  that.timer = window.setInterval(function () {
+    that.turn(that.direction);
+  }, that.gameSpeed);
 }
 
 
