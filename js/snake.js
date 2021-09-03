@@ -53,7 +53,10 @@ Snake.prototype.turn = function () {
     // window.location.reload();
     this.updateTime(false);
 
-    that.gameOver(that.eggNum * 10);
+    that.gameOver({
+      score:that.eggNum * 10,
+      time:that.timeBegin + 's'
+    });
   } else if (this.biteMyself()) {
     clearInterval(that.timer);
     alert("咬自己了，game over");
