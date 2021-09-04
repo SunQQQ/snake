@@ -1,6 +1,6 @@
 var messageBox = new MessageBox();
 
-messageBox.init();
+// messageBox.init();
 
 // 游戏结束后的处理逻辑
 var OverDeal = function (gameData) {
@@ -20,6 +20,9 @@ var OverDeal = function (gameData) {
         success: function (data) {
             console.log('upload success backback');
             console.log(data);
+            messageBox.reloadScoreList();
+
+            messageBox.reloadGame(gameData.score - 10);
         }
     });
 };
@@ -30,11 +33,12 @@ var snakeObject = new Snake({
 });
 
 snakeObject.drawChessBoard();// 画棋盘
-// messageBox.openMessageBox();
 
 snakeObject.upDownAnimation(function () {   // 欢迎动画
-    messageBox.openMessageBox();
-    snakeObject.beginGame();
+
+    messageBox.getUserInfo(function () {
+      snakeObject.beginGame();
+    });
 
     snakeObject.listenKeyDown(); //监听上下左右按钮
     var firstBody = snakeObject.createRandomBlock('black');// 随机上色一个方块

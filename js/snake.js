@@ -24,7 +24,6 @@ function Snake(para) {
 
 // 蛇的转向
 Snake.prototype.turn = function () {
-  console.log('turn');
   var that = this;
 
   that.direction = arguments[0];
@@ -65,9 +64,11 @@ Snake.prototype.turn = function () {
 
     window.clearInterval(that.timer);
     // alert("已撞晕，game over");
-    // window.location.reload();
     this.updateTime(false);
-    that.gameOver(that.eggNum * 10);
+    that.gameOver({
+      score:that.eggNum * 10,
+      time:that.timeBegin + 's'
+    });
   } else {
     if (this.snakeBody[this.snakeBody.length - 1] == this.block) {
       this.createEgg();
@@ -125,6 +126,8 @@ Snake.prototype.createEgg = function () {
   } else if (this.eggNum == 10) {
     this.gameSpeed -= 30;
   }
+
+  this.beginGame();
 }
 
 // 判断蛇是否咬到自己
@@ -244,6 +247,10 @@ Snake.prototype.leftRightAnimation = function(callback){
 
 Snake.prototype.beginGame = function (){
   var that = this;
+  if(that.timer){
+    clearInterval(that.timer);
+  }
+
   that.timer = window.setInterval(function () {
     that.turn(that.direction);
   }, that.gameSpeed);

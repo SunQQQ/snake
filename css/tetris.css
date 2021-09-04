@@ -82,7 +82,7 @@ td{
     right: 0;
     top:0;
     bottom: 0;
-    background-color: grey;
+    /*background-color: grey;*/
 
     display: none;
     align-items: center;
