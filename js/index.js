@@ -22,7 +22,7 @@ var OverDeal = function (gameData) {
             console.log(data);
             messageBox.reloadScoreList();
 
-            messageBox.reloadGame(gameData.score - 10);
+            messageBox.reloadGame(gameData.score - 10,gameData.overReason);
         }
     });
 };

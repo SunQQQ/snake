@@ -76,12 +76,12 @@ MessageBox.prototype.myAjax = function (para) {
 };
 
 // 游戏结束后的弹框
-MessageBox.prototype.reloadGame = function (score) {
+MessageBox.prototype.reloadGame = function (score,overReason) {
   var text = '您的得分是';
   var text2 = '，看下榜单有没有你吧';
   document.getElementsByClassName('wrapper')[0].style.display = 'flex';
   document.getElementsByClassName('sq-input')[0].style.display = 'none';
-  document.getElementsByClassName('box-header')[0].innerHTML = 'Game Over';
+  document.getElementsByClassName('box-header')[0].innerHTML = overReason;
   document.getElementsByClassName('box-content')[0].innerHTML = text + score + text2;
 
 

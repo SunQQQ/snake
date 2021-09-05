@@ -48,28 +48,31 @@ Snake.prototype.turn = function () {
 
   if (this.headertd > 29 || this.headerTr > 29 || this.headertd < 0 || this.headerTr < 0) {
     window.clearInterval(that.timer);
-    // alert("已撞晕，game over");
-    // window.location.reload();
+    that.timer = null;
+    console.log('timer',that.timer);
+
     this.updateTime(false);
 
     that.gameOver({
       score:that.eggNum * 10,
-      time:that.timeBegin + 's'
+      time:that.timeBegin + 's',
+      overReason:'撞墙啦'
     });
   } else if (this.biteMyself()) {
-    clearInterval(that.timer);
-    alert("咬自己了，game over");
-    this.updateTime(false);
+    console.log('咬到自己');
 
+    clearInterval(that.timer);
+    this.updateTime(false);
 
     window.clearInterval(that.timer);
-    // alert("已撞晕，game over");
-    this.updateTime(false);
     that.gameOver({
       score:that.eggNum * 10,
-      time:that.timeBegin + 's'
+      time:that.timeBegin + 's',
+      overReason: '咬自己啦'
     });
   } else {
+    console.log('接着生长');
+
     if (this.snakeBody[this.snakeBody.length - 1] == this.block) {
       this.createEgg();
       this.snakeBody[0].style.backgroundColor = "black";
@@ -246,9 +249,12 @@ Snake.prototype.leftRightAnimation = function(callback){
 }
 
 Snake.prototype.beginGame = function (){
+  console.log('开始游戏');
+
   var that = this;
   if(that.timer){
     clearInterval(that.timer);
+    that.timer = null;
   }
 
   that.timer = window.setInterval(function () {
