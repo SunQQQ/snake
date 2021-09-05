@@ -75,7 +75,10 @@ MessageBox.prototype.reloadGame = function (score,overReason) {
 
   // 显示弹框，隐藏掉输入框，修改掉部分文本
   document.getElementsByClassName('wrapper')[0].style.display = 'flex';
-  document.getElementsByClassName('sq-input')[0].style.display = 'none';
+  if(document.getElementsByClassName('sq-input')[0]){
+    document.getElementsByClassName('sq-input')[0].style.display = 'none';
+  }
+
   document.getElementsByClassName('box-header')[0].innerHTML = overReason;
   document.getElementsByClassName('box-content')[0].innerHTML = text + score + text2;
   // 添加一个按钮

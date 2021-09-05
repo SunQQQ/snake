@@ -47,17 +47,21 @@ Snake.prototype.turn = function () {
   }
 
   if (this.headertd > 29 || this.headerTr > 29 || this.headertd < 0 || this.headerTr < 0) {
-    window.clearInterval(that.timer);
-    that.timer = null;
-    console.log('timer',that.timer);
+    if(that.timer){
+      window.clearInterval(that.timer);
+      that.timer = null;
+      console.log('timer',that.timer);
 
-    this.updateTime(false);
+      this.updateTime(false);
 
-    that.gameOver({
-      score:that.eggNum * 10,
-      time:that.timeBegin + 's',
-      overReason:'撞墙啦'
-    });
+      that.gameOver({
+        score:that.eggNum * 10,
+        time:that.timeBegin + 's',
+        overReason:'撞墙啦'
+      });
+    }else {
+      return;
+    }
   } else if (this.biteMyself()) {
     console.log('咬到自己');
 
