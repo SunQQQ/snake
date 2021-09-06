@@ -142,7 +142,6 @@ td{
 .box-btns button{
     padding: 9px 15px;
     color: #606266;
-    border: 1px solid #dcdfe6;
     outline: none;
     line-height: 1;
     font-size: 12px;
@@ -153,7 +152,14 @@ td{
     cursor: pointer;
 }
 
-.conform{
+.box-btns .leave-Message{
+    display: none;
+    background-color: #f56c6c;
+    border-color: #f56c6c;
+    color:#fff;
+}
+
+.box-btns .conform{
     background-color: #409eff !important;
     color: #fff !important;
     border: 1px solid #409eff !important;
@@ -163,4 +169,11 @@ td{
     color: #409eff;
     border-color: #c6e2ff;
     background-color: #ecf5ff;
+}
+
+.box-btns .leave-Message:focus, .box-btns .leave-Message:hover{
+    display: none;
+    background-color: rgba(245, 108, 108, 0.7);
+    border-color: rgba(245, 108, 108, 0.7);
+    color:#fff;
 }

@@ -2,14 +2,7 @@
 * author:sunquan 2021/8/29
 * 实现一个排名类，从弹框收集数据开始，到排名展示
 */
-function MessageBox() {
-  
-}
-
-MessageBox.prototype.init = function(){
-
-
-};
+function MessageBox() {}
 
 // 关闭弹框
 MessageBox.prototype.closeMessageBox = function () {
@@ -79,18 +72,24 @@ MessageBox.prototype.myAjax = function (para) {
 MessageBox.prototype.reloadGame = function (score,overReason) {
   var text = '您的得分是';
   var text2 = '，看下榜单有没有你吧';
+
+  // 显示弹框，隐藏掉输入框，修改掉部分文本
   document.getElementsByClassName('wrapper')[0].style.display = 'flex';
   document.getElementsByClassName('sq-input')[0].style.display = 'none';
   document.getElementsByClassName('box-header')[0].innerHTML = overReason;
   document.getElementsByClassName('box-content')[0].innerHTML = text + score + text2;
-
-
+  // 添加一个按钮
+  document.getElementsByClassName('leave-Message')[0].style.display = 'inline';
+  // 修改按钮上的文字
   document.getElementsByClassName('conform')[0].innerHTML = '看下源码';
   document.getElementsByClassName('skip')[0].innerHTML = '再来一局';
   document.getElementsByClassName('head-button')[0].style.display = 'none';
 
 
-  // 按钮绑定点击方法
+  // 修改按钮绑定的函数
+  document.getElementsByClassName('leave-Message')[0].onclick = function (){
+    window.open('http://39.104.22.73:67/#/MessageBoard');
+  };
   document.getElementsByClassName('conform')[0].onclick = function () {
     window.open('https://github.com/SunQQQ/snake');
   };
