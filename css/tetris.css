@@ -177,3 +177,17 @@ td{
     border-color: rgba(245, 108, 108, 0.7);
     color:#fff;
 }
+
+.ranking p{
+    display: flex;
+    text-indent: 0;
+}
+.user-name{
+    width: 80px;
+    overflow: hidden;
+    vertical-align: middle;
+    text-indent: 20px;
+}
+.score-num{
+    vertical-align: middle;
+}

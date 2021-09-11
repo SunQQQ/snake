@@ -15,17 +15,6 @@ var OverDeal = function (gameData) {
     });
 
     messageBox.reloadGame(gameData.score - 10,gameData.overReason);
-
-    // messageBox.myAjax({
-    //     url: 'http://39.104.22.73:8081/ScoreCreate/foreend',
-    //     data: para,
-    //     success: function (data) {
-    //         // 重载英雄榜
-    //         messageBox.reloadScoreList();
-    //         // 弹出游戏结束弹框
-    //         messageBox.reloadGame(gameData.score - 10,gameData.overReason);
-    //     }
-    // });
 };
 
 var snakeObject = new Snake({

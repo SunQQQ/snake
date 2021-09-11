@@ -26,7 +26,9 @@ MessageBox.prototype.reloadScoreList = function(callback){
         rankString = '';
 
       for(var i=0;i<scoreList.length;i++){
-        rankString += ('<p>' + scoreList[i].userName + ': ' + scoreList[i].score + '分</p>');
+        rankString += ('<p class="score-line"><div class="user-name">' + scoreList[i].userName +
+          '</div>:<div class="score-num">' +
+          scoreList[i].score + '分</div></p>');
       }
 
       // 更新榜单内容
