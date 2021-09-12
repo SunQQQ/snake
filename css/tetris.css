@@ -181,13 +181,19 @@ td{
 .ranking p{
     display: flex;
     text-indent: 0;
+    height: 16px;
+    line-height: 16px;
+    text-indent: 20px;
 }
 .user-name{
-    width: 80px;
+    width: 120px;
     overflow: hidden;
     vertical-align: middle;
     text-indent: 20px;
 }
 .score-num{
     vertical-align: middle;
+    text-indent: 10px;
+    width: 85px;
+    overflow: hidden;
 }
