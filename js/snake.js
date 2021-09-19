@@ -46,7 +46,7 @@ Snake.prototype.turn = function () {
     this.headerTr += 1;
   }
 
-  if (this.headertd > 29 || this.headerTr > 29 || this.headertd < 0 || this.headerTr < 0) {
+  if (this.headertd > 29 || this.headerTr > 29 || this.headertd < 0 || this.headerTr < 0) {   //判断点击了方向键后，下一个移动的方块，是否碰到墙壁
     if(that.timer){
       window.clearInterval(that.timer);
       that.timer = null;
@@ -62,7 +62,7 @@ Snake.prototype.turn = function () {
     }else {
       return;
     }
-  } else if (this.biteMyself()) {
+  } else if (this.biteMyself()) {    //判断点击了方向键后，下一个移动的方块，是否碰到自己的身体
     console.log('咬到自己');
 
     clearInterval(that.timer);
@@ -74,18 +74,17 @@ Snake.prototype.turn = function () {
       time:that.timeBegin + 's',
       overReason: '咬自己啦'
     });
-  } else {
-    console.log('接着生长');
-
-    if (this.snakeBody[this.snakeBody.length - 1] == this.block) {
+  } else {                          //点击了方向键后，下一个移动的方块，不咬自己也不碰墙的逻辑处理
+    if (this.snakeBody[this.snakeBody.length - 1] == this.block) {      //点击了方向键后，下一个移动的方块，刚好是蛋
       this.createEgg();
       this.snakeBody[0].style.backgroundColor = "black";
-    } else {
-      this.snakeBody[0].style.backgroundColor = "rgb(88, 104, 88)";
-      this.snakeBody[0].style.border = "3px solid rgb(88, 104, 88)";
+    } else {                                                            //点击了方向键后，下一个移动的方块，不是蛋
+      this.snakeBody[0].style.backgroundColor = "rgb(88, 104, 88)";     //蛇身体那个数组的第一个元素恢复成棋盘的背景颜色，
+      this.snakeBody[0].style.border = "3px solid rgb(88, 104, 88)";    //删除蛇身数组第一个元素
       this.snakeBody.shift();
     }
 
+    //给蛇身数组添加对应方向上的下一个方块。配合上面删除数组第一个元素并恢复背景色的操作，表现出一种往前挪到的动画
     this.snakeBody.push(this.tds[this.headerTr][this.headertd]);
 
 
@@ -262,7 +261,7 @@ Snake.prototype.beginGame = function (){
   }
 
   that.timer = window.setInterval(function () {
-    that.turn(that.direction);
+    that.turn(that.direction);                //如果不按方向键，程序会定时循环调用turn方法，并传入目前的方向。玩家看到的就是不操作键盘时，蛇一直朝着一个方向向前游
   }, that.gameSpeed);
 }
 
