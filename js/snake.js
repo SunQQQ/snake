@@ -1,8 +1,8 @@
 /**
-* author: sunquan 2017/3/9.
-*
-* 本文件用js语言实现一个贪吃蛇类；
-*/
+ * author: sunquan 2017/3/9.
+ *
+ * 本文件用js语言实现一个贪吃蛇类；
+ */
 function Snake(para) {
   // 在新建蛇时可以修改的参数
   this.gameSpeed = para.gameSpeed; //游戏开场时的速度
@@ -47,19 +47,19 @@ Snake.prototype.turn = function () {
   }
 
   if (this.headertd > 29 || this.headerTr > 29 || this.headertd < 0 || this.headerTr < 0) {   //判断点击了方向键后，下一个移动的方块，是否碰到墙壁
-    if(that.timer){
+    if (that.timer) {
       window.clearInterval(that.timer);
       that.timer = null;
-      console.log('timer',that.timer);
+      console.log('timer', that.timer);
 
       this.updateTime(false);
 
       that.gameOver({
-        score:that.eggNum * 10,
-        time:that.timeBegin + 's',
-        overReason:'撞墙啦'
+        score: that.eggNum * 10,
+        time: that.timeBegin + 's',
+        overReason: '撞墙啦'
       });
-    }else {
+    } else {
       return;
     }
   } else if (this.biteMyself()) {    //判断点击了方向键后，下一个移动的方块，是否碰到自己的身体
@@ -70,8 +70,8 @@ Snake.prototype.turn = function () {
 
     window.clearInterval(that.timer);
     that.gameOver({
-      score:that.eggNum * 10,
-      time:that.timeBegin + 's',
+      score: that.eggNum * 10,
+      time: that.timeBegin + 's',
       overReason: '咬自己啦'
     });
   } else {                          //点击了方向键后，下一个移动的方块，不咬自己也不碰墙的逻辑处理
@@ -98,10 +98,25 @@ Snake.prototype.turn = function () {
  * color:方块的背景色，和边框颜色
  */
 Snake.prototype.createRandomBlock = function (color) {
-  var horizon = parseInt(Math.random() * 30),
-    vertical = parseInt(Math.random() * 30);
+  var horizon, vertical;
 
-  this.block = this.tds[horizon][vertical];
+  // 初始化时随机渲染一个黑色块作为蛇身
+  if (color == 'black') {
+
+    horizon = parseInt(Math.random() * 30);
+    vertical = parseInt(Math.random() * 30);
+    this.block = this.tds[horizon][vertical];
+  } else {//之后会持续创建红块作为蛋
+
+    do {
+      horizon = parseInt(Math.random() * 30);
+      vertical = parseInt(Math.random() * 30);
+      this.block = this.tds[horizon][vertical];
+      console.log('创建一次');
+    } while (this.snakeBody.indexOf(this.block) != -1);   // 如果随机生成的蛋刚好在蛇身里，重新生成；
+
+  }
+
   this.block.style.backgroundColor = color;
   this.block.style.border = "3px solid " + color;
 
@@ -183,12 +198,12 @@ Snake.prototype.listenKeyDown = function () {
 Snake.prototype.updateTime = function (close) {
   var that = this;//给游戏更新持续时间;
 
-  if(close){
+  if (close) {
     that.timeWatch = window.setInterval(function () {
       that.timeBegin += 1;
       document.getElementsByClassName('time')[0].innerHTML = that.timeBegin;
-    },1000);
-  }else {
+    }, 1000);
+  } else {
     console.log('游戏计时停止');
     window.clearInterval(that.timeWatch);
     that.timeWatch = 0;
@@ -196,7 +211,7 @@ Snake.prototype.updateTime = function (close) {
 }
 
 // 游戏开场的上下动画
-Snake.prototype.upDownAnimation = function(callback){
+Snake.prototype.upDownAnimation = function (callback) {
   var that = this,
     trNum = -1,
     tdNum = 30
@@ -206,25 +221,25 @@ Snake.prototype.upDownAnimation = function(callback){
     trNum += 1;
     tdNum -= 1;
 
-    if(trNum < 30){
-      for(var i=0;i<29;i= i+2){
+    if (trNum < 30) {
+      for (var i = 0; i < 29; i = i + 2) {
         that.tds[trNum][i].style.backgroundColor = 'black';
         that.tds[trNum][i].style.border = '3px solid black';
       }
 
-      for(var t=29;t>-1;t= t-2){
+      for (var t = 29; t > -1; t = t - 2) {
         that.tds[tdNum][t].style.backgroundColor = 'black';
         that.tds[tdNum][t].style.border = '3px solid black';
       }
-    }else {
+    } else {
       window.clearInterval(upDownInter);
       that.leftRightAnimation(callback);
     }
-  },50);
+  }, 50);
 }
 
 // 游戏开场的左右动画
-Snake.prototype.leftRightAnimation = function(callback){
+Snake.prototype.leftRightAnimation = function (callback) {
   var that = this,
     leftRightTdStart = -1,
     leftRightTdEnd = 30;
@@ -234,32 +249,34 @@ Snake.prototype.leftRightAnimation = function(callback){
     leftRightTdStart += 1;
     leftRightTdEnd -= 1;
 
-    if(leftRightTdStart < 30){
-      for(var i=0;i<29;i= i+2){
+    if (leftRightTdStart < 30) {
+      for (var i = 0; i < 29; i = i + 2) {
         that.tds[i][leftRightTdStart].style.backgroundColor = 'rgb(88, 104, 88)';
         that.tds[i][leftRightTdStart].style.border = '3px solid rgb(88, 104, 88)';
       }
 
-      for(var t=29;t>-1;t= t-2){
+      for (var t = 29; t > -1; t = t - 2) {
         that.tds[t][leftRightTdEnd].style.backgroundColor = 'rgb(88, 104, 88)';
         that.tds[t][leftRightTdEnd].style.border = '3px solid rgb(88, 104, 88)';
       }
-    }else {
+    } else {
       window.clearInterval(leftRightInter);
       callback();
     }
-  },50);
+  }, 50);
 }
 
-Snake.prototype.beginGame = function (){
+Snake.prototype.beginGame = function () {
   console.log('开始游戏');
-
   var that = this;
-  if(that.timer){
+
+  // 如果循环存在，清除掉循环。为创建新循环做准备
+  if (that.timer) {
     clearInterval(that.timer);
     that.timer = null;
   }
 
+  // 根据吃的蛋个数不同，提升循环间隔时间
   that.timer = window.setInterval(function () {
     that.turn(that.direction);                //如果不按方向键，程序会定时循环调用turn方法，并传入目前的方向。玩家看到的就是不操作键盘时，蛇一直朝着一个方向向前游
   }, that.gameSpeed);
