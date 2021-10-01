@@ -62,9 +62,7 @@ Snake.prototype.turn = function () {
     } else {
       return;
     }
-  } else if (this.biteMyself()) {    //判断点击了方向键后，下一个移动的方块，是否碰到自己的身体
-    console.log('咬到自己');
-
+  } else if (this.biteMyself()) {
     clearInterval(that.timer);
     this.updateTime(false);
 
@@ -86,7 +84,6 @@ Snake.prototype.turn = function () {
 
     //给蛇身数组添加对应方向上的下一个方块。配合上面删除数组第一个元素并恢复背景色的操作，表现出一种往前挪到的动画
     this.snakeBody.push(this.tds[this.headerTr][this.headertd]);
-
 
     this.snakeBody[this.snakeBody.length - 1].style.backgroundColor = "black";
     this.snakeBody[this.snakeBody.length - 1].style.border = "3px solid black";
