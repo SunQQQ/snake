@@ -78,8 +78,12 @@ Snake.prototype.turn = function () {
       this.snakeBody[0].style.backgroundColor = "black";
     } else {                                                            //点击了方向键后，下一个移动的方块，不是蛋
       this.snakeBody[0].style.backgroundColor = "rgb(88, 104, 88)";     //蛇身体那个数组的第一个元素恢复成棋盘的背景颜色，
-      this.snakeBody[0].style.border = "3px solid rgb(88, 104, 88)";    //删除蛇身数组第一个元素
-      this.snakeBody.shift();
+      this.snakeBody[0].style.border = "3px solid rgb(88, 104, 88)";
+      // 如果吃了蛇蛋后，清除最后一个蛇蛋的样式
+      this.snakeBody[0].style.borderRadius = "0px";
+      this.snakeBody[0].style.boxShadow = '0px 0px 0px 3px rgb(103,120,104) inset';
+
+      this.snakeBody.shift();                                           //删除蛇身数组第一个元素
     }
 
     //给蛇身数组添加对应方向上的下一个方块。配合上面删除数组第一个元素并恢复背景色的操作，表现出一种往前挪到的动画
@@ -103,19 +107,23 @@ Snake.prototype.createRandomBlock = function (color) {
     horizon = parseInt(Math.random() * 30);
     vertical = parseInt(Math.random() * 30);
     this.block = this.tds[horizon][vertical];
-  } else {//之后会持续创建红块作为蛋
+    this.block.style.backgroundColor = color;
+    this.block.style.border = "3px solid " + color;
+  } else {//之后会持续创建白块作为蛋
 
     do {
       horizon = parseInt(Math.random() * 30);
       vertical = parseInt(Math.random() * 30);
       this.block = this.tds[horizon][vertical];
       console.log('创建一次');
+
+      this.block.style.backgroundColor = color;
+      this.block.style.border = "3px solid " + color;
+      this.block.style.boxShadow = "none";
+      this.block.style.borderRadius = "10px";
     } while (this.snakeBody.indexOf(this.block) != -1);   // 如果随机生成的蛋刚好在蛇身里，重新生成；
 
   }
-
-  this.block.style.backgroundColor = color;
-  this.block.style.border = "3px solid " + color;
 
   return {
     horizon: horizon,
@@ -127,7 +135,7 @@ Snake.prototype.createRandomBlock = function (color) {
  * 创建一个新的蛋，并刷新游戏成绩，提高游戏速度
  */
 Snake.prototype.createEgg = function () {
-  this.createRandomBlock('red');
+  this.createRandomBlock('white');
 
   document.getElementsByClassName("score")[0].innerHTML = this.eggNum * 10;
 
