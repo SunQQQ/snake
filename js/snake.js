@@ -272,7 +272,6 @@ Snake.prototype.leftRightAnimation = function (callback) {
 }
 
 Snake.prototype.beginGame = function () {
-  console.log('开始游戏');
   var that = this;
 
   // 如果循环存在，清除掉循环。为创建新循环做准备

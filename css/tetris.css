@@ -180,16 +180,15 @@ td{
 
 .ranking p{
     display: flex;
-    text-indent: 0;
     height: 16px;
     line-height: 16px;
-    text-indent: 20px;
+    text-indent: 0;
 }
+
 .user-name{
     width: 120px;
     overflow: hidden;
     vertical-align: middle;
-    text-indent: 20px;
 }
 .score-num{
     vertical-align: middle;
