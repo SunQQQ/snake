@@ -19,7 +19,8 @@ function Snake(para) {
   this.preDirection;    // 第一个蛇头的方向
   this.timeBegin = 0;   // 游戏计时变量
   this.timeWatch = '';  // 统计游戏持续时间
-  this.direction = '';
+  this.direction = 'down';
+  this.begin = false; // 游戏是否开始
 }
 
 // 蛇的转向
@@ -27,6 +28,12 @@ Snake.prototype.turn = function () {
   var that = this;
 
   that.direction = arguments[0];
+
+  // 如果是第一次按按钮，开始游戏即时
+  if(!that.begin && that.direction){
+    that.updateTime(true);
+    that.begin = true;
+  }
 
   // 限制回退操作
   if ((that.preDirection == "left" && that.direction == "right") || (that.preDirection == "right" && that.direction == "left")) {

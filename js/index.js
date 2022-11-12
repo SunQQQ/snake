@@ -35,11 +35,16 @@ var snakeObject = new Snake({
 
 snakeObject.drawChessBoard();// 画棋盘
 
+messageBox.reloadScoreList(); // 渲染榜单记录
+
 snakeObject.upDownAnimation(function () {   // 欢迎动画
 
-    messageBox.getUserInfo(function () {
-      snakeObject.beginGame();
-    });
+    // messageBox.getUserInfo(function () {
+    //   snakeObject.beginGame();
+    // });
+
+    // 开始游戏
+    snakeObject.beginGame();
 
     snakeObject.listenKeyDown(); //监听上下左右按钮
     var firstBody = snakeObject.createRandomBlock('black');// 随机上色一个方块
@@ -50,5 +55,5 @@ snakeObject.upDownAnimation(function () {   // 欢迎动画
 
     snakeObject.createEgg();// 创建一个蛋
 
-    snakeObject.updateTime(true);
+    // snakeObject.updateTime(true);
 });
