@@ -91,7 +91,7 @@ MessageBox.prototype.reloadGame = function (score,overReason) {
   // 添加一个按钮
   document.getElementsByClassName('leave-Message')[0].style.display = 'inline';
   // 修改按钮上的文字
-  document.getElementsByClassName('conform')[0].innerHTML = '看下源码';
+  document.getElementsByClassName('conform')[0].innerHTML = '查看源码';
   document.getElementsByClassName('skip')[0].innerHTML = '再来一局';
   document.getElementsByClassName('head-button')[0].style.display = 'none';
 

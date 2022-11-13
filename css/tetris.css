@@ -157,6 +157,7 @@ td{
 }
 .box-btns{
     text-align: right;
+    margin: 15px 0 0;
 }
 
 .box-btns button{
