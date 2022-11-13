@@ -1,7 +1,5 @@
 var messageBox = new MessageBox();
 
-// messageBox.init();
-
 // 游戏结束后的处理逻辑
 var OverDeal = function (gameData) {
     var userName = localStorage.getItem('snakeUserName'),
@@ -42,26 +40,20 @@ function init(){
 
     snakeObject.upDownAnimation(function () {   // 欢迎动画
 
-    // messageBox.getUserInfo(function () {
-    //   snakeObject.beginGame();
-    // });
+        // 开始游戏
+        snakeObject.beginGame();
 
-    // 开始游戏
-    snakeObject.beginGame();
+        snakeObject.listenKeyDown(); //监听上下左右按钮
+        var firstBody = snakeObject.createRandomBlock('black',true);// 创建蛇身
 
-    snakeObject.listenKeyDown(); //监听上下左右按钮
-    var firstBody = snakeObject.createRandomBlock('black',true);// 创建蛇身
+        snakeObject.headerTr = firstBody.horizon;// 初始化蛇头位置
+        snakeObject.headertd = firstBody.vertical;
+        snakeObject.snakeBody.push(snakeObject.tds[snakeObject.headerTr][snakeObject.headertd]);//将蛇头放入蛇身
 
-    snakeObject.headerTr = firstBody.horizon;// 初始化蛇头位置
-    snakeObject.headertd = firstBody.vertical;
-    snakeObject.snakeBody.push(snakeObject.tds[snakeObject.headerTr][snakeObject.headertd]);//将蛇头放入蛇身
-
-    snakeObject.createEgg(true);// 创建一个蛋
-
-    // snakeObject.updateTime(true);
+        snakeObject.createEgg(true);// 创建一个蛋
     });
 }
 
 document.getElementsByClassName('edit')[0].addEventListener('click',function(){
-    alert('jj');
+    messageBox.getUserInfo();
 });

@@ -11,6 +11,9 @@ MessageBox.prototype.closeMessageBox = function () {
   // 收集用户输入的昵称，或默认生成的昵称
   var userName = document.getElementsByTagName('input')[0].value;
 
+  // 刷新操作栏的用户名称
+  document.getElementsByClassName('name')[0].innerHTML = userName;
+
   // 在localstorage里存下用户输入，或默认生成的昵称
   localStorage.setItem('snakeUserName',userName);
 };
@@ -23,7 +26,8 @@ MessageBox.prototype.reloadScoreList = function(callback){
       var data = JSON.parse(data),
         scoreList = data.data.scores,
         num = data.data.num,
-        rankString = '';
+        rankString = '',
+        userName = localStorage.getItem('snakeUserName') ? localStorage.getItem('snakeUserName') : ('游客' + num);
 
       for(var i=0;i<scoreList.length;i++){
         rankString += ('<p><span class="user-name">' + scoreList[i].userName +
@@ -34,7 +38,7 @@ MessageBox.prototype.reloadScoreList = function(callback){
       // 更新榜单内容
       document.getElementsByClassName('ranking')[0].innerHTML = rankString;
       // input填入默认用户名
-      document.getElementsByClassName('name')[0].innerHTML = '游客' + num;
+      document.getElementsByClassName('name')[0].innerHTML = userName;
 
       if(callback){
         callback();
@@ -47,9 +51,10 @@ MessageBox.prototype.getUserInfo = function (callback) {
   // 弹出输入框
   document.getElementsByClassName('wrapper')[0].style.display = 'flex';
 
-  this.reloadScoreList(callback);
+  // 回显input默认值
+  document.getElementsByTagName('input')[0].value = document.getElementsByClassName('name')[0].innerHTML;
 
-  // 按钮绑定点击方法
+  // 按钮绑定点击方法,会收集用户名称并存入localstorage
   document.getElementsByClassName('conform')[0].onclick = this.closeMessageBox;
   document.getElementsByClassName('head-button')[0].onclick = this.closeMessageBox;
   document.getElementsByClassName('skip')[0].onclick = this.closeMessageBox;
