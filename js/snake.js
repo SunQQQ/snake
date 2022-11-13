@@ -105,22 +105,22 @@ Snake.prototype.turn = function () {
  * 随机的给一个方块上色
  * color:方块的背景色，和边框颜色
  */
-Snake.prototype.createRandomBlock = function (color) {
+Snake.prototype.createRandomBlock = function (color,init) {
   var horizon, vertical;
 
   // 初始化时随机渲染一个黑色块作为蛇身
   if (color == 'black') {
 
-    horizon = parseInt(Math.random() * 30);
-    vertical = parseInt(Math.random() * 30);
+    horizon = init ? 15 : parseInt(Math.random() * 30);
+    vertical = init ? 15 : parseInt(Math.random() * 30);
     this.block = this.tds[horizon][vertical];
     this.block.style.backgroundColor = color;
     this.block.style.border = "3px solid " + color;
   } else {//之后会持续创建白块作为蛋
 
     do {
-      horizon = parseInt(Math.random() * 30);
-      vertical = parseInt(Math.random() * 30);
+      horizon = init ? 20 : parseInt(Math.random() * 30);
+      vertical = init ? 15 : parseInt(Math.random() * 30);
       this.block = this.tds[horizon][vertical];
       console.log('创建一次');
 
@@ -141,23 +141,29 @@ Snake.prototype.createRandomBlock = function (color) {
 /**
  * 创建一个新的蛋，并刷新游戏成绩，提高游戏速度
  */
-Snake.prototype.createEgg = function () {
-  this.createRandomBlock('white');
+Snake.prototype.createEgg = function (init) {
+  if(init){
+    this.createRandomBlock('white',init);
+  }else{
+    this.createRandomBlock('white');
+  }
 
+  // 更新得分
   document.getElementsByClassName("score")[0].innerHTML = this.eggNum * 10;
 
-  this.eggNum += 1;
+  this.eggNum += 1; // 已吃鸡蛋计数
 
+  // 更新游戏速度
   if (this.eggNum == 2) {
-    this.gameSpeed -= 30;
+    this.gameSpeed -= 100;
   } else if (this.eggNum == 4) {
-    this.gameSpeed -= 30;
+    this.gameSpeed -= 100;
   } else if (this.eggNum == 6) {
-    this.gameSpeed -= 30;
+    this.gameSpeed -= 100;
   } else if (this.eggNum == 8) {
-    this.gameSpeed -= 30;
+    this.gameSpeed -= 100;
   } else if (this.eggNum == 10) {
-    this.gameSpeed -= 30;
+    this.gameSpeed -= 50;
   }
 
   this.beginGame();

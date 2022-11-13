@@ -29,7 +29,7 @@ var OverDeal = function (gameData) {
 };
 
 var snakeObject = new Snake({
-    gameSpeed: 200,
+    gameSpeed: 500,
     gameOver: OverDeal
 });
 
@@ -47,13 +47,14 @@ snakeObject.upDownAnimation(function () {   // 欢迎动画
     snakeObject.beginGame();
 
     snakeObject.listenKeyDown(); //监听上下左右按钮
-    var firstBody = snakeObject.createRandomBlock('black');// 随机上色一个方块
+    var firstBody = snakeObject.createRandomBlock('black',true);// 创建蛇身
 
     snakeObject.headerTr = firstBody.horizon;// 初始化蛇头位置
     snakeObject.headertd = firstBody.vertical;
     snakeObject.snakeBody.push(snakeObject.tds[snakeObject.headerTr][snakeObject.headertd]);//将蛇头放入蛇身
 
-    snakeObject.createEgg();// 创建一个蛋
+    snakeObject.createEgg(true);// 创建一个蛋
+    // snakeObject.createRandomBlock('white',true);
 
     // snakeObject.updateTime(true);
 });
