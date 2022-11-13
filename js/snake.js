@@ -157,11 +157,11 @@ Snake.prototype.createEgg = function (init) {
   if (this.eggNum == 1) {
     this.gameSpeed -= 150;
   } else if (this.eggNum == 3) {
-    this.gameSpeed -= 150;
+    this.gameSpeed -= 120;
   } else if (this.eggNum == 5) {
-    this.gameSpeed -= 150;
+    this.gameSpeed -= 100;
   } else if (this.eggNum == 7) {
-    this.gameSpeed -= 20;
+    this.gameSpeed -= 80;
   } else if (this.eggNum == 9) {
     this.gameSpeed -= 20;
   }
