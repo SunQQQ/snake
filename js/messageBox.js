@@ -33,10 +33,10 @@ MessageBox.prototype.reloadScoreList = function(callback){
 
       // 更新榜单内容
       document.getElementsByClassName('ranking')[0].innerHTML = rankString;
+      // input填入默认用户名
+      document.getElementsByClassName('name')[0].innerHTML = '游客' + num;
 
       if(callback){
-        // input填入默认用户名
-        document.getElementsByTagName('input')[0].value = '游客' + num;
         callback();
       }
     }

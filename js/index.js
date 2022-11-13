@@ -33,11 +33,14 @@ var snakeObject = new Snake({
     gameOver: OverDeal
 });
 
-snakeObject.drawChessBoard();// 画棋盘
+init();
 
-messageBox.reloadScoreList(); // 渲染榜单记录
+function init(){
+    snakeObject.drawChessBoard();// 画棋盘
 
-snakeObject.upDownAnimation(function () {   // 欢迎动画
+    messageBox.reloadScoreList(); // 渲染榜单记录
+
+    snakeObject.upDownAnimation(function () {   // 欢迎动画
 
     // messageBox.getUserInfo(function () {
     //   snakeObject.beginGame();
@@ -54,7 +57,11 @@ snakeObject.upDownAnimation(function () {   // 欢迎动画
     snakeObject.snakeBody.push(snakeObject.tds[snakeObject.headerTr][snakeObject.headertd]);//将蛇头放入蛇身
 
     snakeObject.createEgg(true);// 创建一个蛋
-    // snakeObject.createRandomBlock('white',true);
 
     // snakeObject.updateTime(true);
+    });
+}
+
+document.getElementsByClassName('edit')[0].addEventListener('click',function(){
+    alert('jj');
 });

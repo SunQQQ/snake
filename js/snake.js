@@ -149,21 +149,21 @@ Snake.prototype.createEgg = function (init) {
   }
 
   // 更新得分
-  document.getElementsByClassName("score")[0].innerHTML = this.eggNum * 10;
+  document.getElementsByClassName("score")[1].innerHTML = this.eggNum * 10;
 
   this.eggNum += 1; // 已吃鸡蛋计数
 
   // 更新游戏速度
-  if (this.eggNum == 2) {
-    this.gameSpeed -= 100;
-  } else if (this.eggNum == 4) {
-    this.gameSpeed -= 100;
-  } else if (this.eggNum == 6) {
-    this.gameSpeed -= 100;
-  } else if (this.eggNum == 8) {
-    this.gameSpeed -= 100;
-  } else if (this.eggNum == 10) {
-    this.gameSpeed -= 50;
+  if (this.eggNum == 1) {
+    this.gameSpeed -= 150;
+  } else if (this.eggNum == 3) {
+    this.gameSpeed -= 150;
+  } else if (this.eggNum == 5) {
+    this.gameSpeed -= 150;
+  } else if (this.eggNum == 7) {
+    this.gameSpeed -= 20;
+  } else if (this.eggNum == 9) {
+    this.gameSpeed -= 20;
   }
 
   this.beginGame();
