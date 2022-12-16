@@ -2,7 +2,7 @@ var messageBox = new MessageBox();
 
 // 游戏结束后的处理逻辑
 var OverDeal = function (gameData) {
-    var userName = localStorage.getItem('snakeUserName'),
+    var userName = localStorage.getItem('snakeUserName') ? localStorage.getItem('snakeUserName') : document.getElementsByClassName('name')[0].innerHTML,
         currentTime = (new Date).toLocaleString();
 
     var para = JSON.stringify({
