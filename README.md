@@ -17,7 +17,7 @@ js文件有三个版本，第一版是17年刚学js时写的，第二版是18年
 手动笔芯![Rose.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/63.gif)![Kiss.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/65.gif)![Heart.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/66.gif)
 
 ## About Me
-我还有一个自己开发的博客，欢迎光临。 地址是：http://39.104.22.73:67/
+我还有一个自己开发的博客，欢迎光临。 地址是：https://codinglife.online/snake/
 
 如果有吐槽或者建议、或者技术上的交流，可在博客留言板联系我。
 
