@@ -12,7 +12,7 @@ var OverDeal = function (gameData) {
         createTime: currentTime
     });
 
-    messageBox.reloadGame(gameData.score - 10,gameData.overReason);
+    messageBox.reloadGame(gameData.score - 10, gameData.overReason);
 
     messageBox.myAjax({
         url: 'http://39.104.22.73:8081/ScoreCreate/foreend',
@@ -21,7 +21,20 @@ var OverDeal = function (gameData) {
             // 重载英雄榜
             messageBox.reloadScoreList();
             // 弹出游戏结束弹框
-            messageBox.reloadGame(gameData.score - 10,gameData.overReason);
+            messageBox.reloadGame(gameData.score - 10, gameData.overReason);
+        }
+    });
+
+    messageBox.myAjax({
+        url: 'https://codinglife.online/api/createLog',
+        data: JSON.stringify({
+            platformType: "贪吃蛇",
+            page: "贪吃蛇",
+            action: "体验",
+            actionObject: "贪吃蛇",
+            actionDesc: ": 玩了" + gameData.time + ",得了" + (gameData.score - 10) + "分",
+        }),
+        Success: function () {
         }
     });
 };
@@ -33,7 +46,7 @@ var snakeObject = new Snake({
 
 init();
 
-function init(){
+function init() {
     snakeObject.drawChessBoard();// 画棋盘
 
     messageBox.reloadScoreList(); // 渲染榜单记录
@@ -44,7 +57,7 @@ function init(){
         snakeObject.beginGame();
 
         snakeObject.listenKeyDown(); //监听上下左右按钮
-        var firstBody = snakeObject.createRandomBlock('black',true);// 创建蛇身
+        var firstBody = snakeObject.createRandomBlock('black', true);// 创建蛇身
 
         snakeObject.headerTr = firstBody.horizon;// 初始化蛇头位置
         snakeObject.headertd = firstBody.vertical;
@@ -54,6 +67,6 @@ function init(){
     });
 }
 
-document.getElementsByClassName('edit')[0].addEventListener('click',function(){
+document.getElementsByClassName('edit')[0].addEventListener('click', function () {
     messageBox.getUserInfo();
 });

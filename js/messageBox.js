@@ -21,7 +21,8 @@ MessageBox.prototype.closeMessageBox = function () {
 MessageBox.prototype.reloadScoreList = function(callback){
   // 请求成绩列表接口，获取游戏记录条数。
   this.myAjax({
-    url:'http://39.104.22.73:8081/ScoreRead/foreend',
+    url:'https://codinglife.online/api/getSnakeScoreList',
+    // url:'localhost:8080/getSnakeScoreList',
     success:function (data){
       var data = JSON.parse(data),
         scoreList = data.data.scores,
