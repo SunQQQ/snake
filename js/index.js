@@ -6,6 +6,7 @@ var OverDeal = function (gameData) {
         currentTime = (new Date).toLocaleString();
 
     var para = JSON.stringify({
+        userName: userName,
         score: gameData.score - 10,
         gameTime: gameData.time,
         userId: 1
@@ -31,7 +32,7 @@ var OverDeal = function (gameData) {
             page: "贪吃蛇",
             action: "体验",
             actionObject: "贪吃蛇",
-            actionDesc: ": 玩了" + gameData.time + ",得了" + (gameData.score - 10) + "分",
+            actionDesc: ": 玩了" + gameData.time + "s,得了" + (gameData.score - 10) + "分",
         }),
         Success: function () {
         }

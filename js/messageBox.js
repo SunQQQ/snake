@@ -21,12 +21,12 @@ MessageBox.prototype.closeMessageBox = function () {
 MessageBox.prototype.reloadScoreList = function(callback){
   // 请求成绩列表接口，获取游戏记录条数。
   this.myAjax({
-    url:'https://codinglife.online/api/getSnakeScoreList',
+    url:'https://codinglife.online/api/getSnakeScoreTopList',
     // url:'localhost:8080/getSnakeScoreList',
     success:function (data){
       var data = JSON.parse(data),
-        scoreList = data.data.scores,
-        num = data.data.num,
+        scoreList = data.data.list,
+        num = data.data.total,
         rankString = '',
         userName = localStorage.getItem('snakeUserName') ? localStorage.getItem('snakeUserName') : ('游客' + num);
 
@@ -99,7 +99,7 @@ MessageBox.prototype.reloadGame = function (score,overReason) {
 
   // 修改按钮绑定的函数
   document.getElementsByClassName('leave-Message')[0].onclick = function (){
-    window.open('http://39.104.22.73:67/#/MessageBoard');
+    window.open('https://codinglife.online/#/MessageBoard');
   };
   document.getElementsByClassName('conform')[0].onclick = function () {
     window.open('https://github.com/SunQQQ/snake');
