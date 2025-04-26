@@ -6,16 +6,15 @@ var OverDeal = function (gameData) {
         currentTime = (new Date).toLocaleString();
 
     var para = JSON.stringify({
-        userName: userName,
         score: gameData.score - 10,
         gameTime: gameData.time,
-        createTime: currentTime
+        userId: 1
     });
 
     messageBox.reloadGame(gameData.score - 10, gameData.overReason);
 
     messageBox.myAjax({
-        url: 'http://39.104.22.73:8081/ScoreCreate/foreend',
+        url: 'https://codinglife.online/api/createScore',
         data: para,
         success: function (data) {
             // 重载英雄榜

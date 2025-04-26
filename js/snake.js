@@ -63,7 +63,7 @@ Snake.prototype.turn = function () {
 
       that.gameOver({
         score: that.eggNum * 10,
-        time: that.timeBegin + 's',
+        time: that.timeBegin,
         overReason: '撞墙啦'
       });
     } else {
@@ -76,7 +76,7 @@ Snake.prototype.turn = function () {
     window.clearInterval(that.timer);
     that.gameOver({
       score: that.eggNum * 10,
-      time: that.timeBegin + 's',
+      time: that.timeBegin,
       overReason: '咬自己啦'
     });
   } else {                          //点击了方向键后，下一个移动的方块，不咬自己也不碰墙的逻辑处理
