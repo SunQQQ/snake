@@ -99,7 +99,7 @@ MessageBox.prototype.reloadGame = function (score,overReason) {
 
   // 修改按钮绑定的函数
   document.getElementsByClassName('leave-Message')[0].onclick = function (){
-    window.open('https://codinglife.online/#/MessageBoard');
+    window.open('https://codinglife.online/message-board');
   };
   document.getElementsByClassName('conform')[0].onclick = function () {
     window.open('https://github.com/SunQQQ/snake');
