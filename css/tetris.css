@@ -140,6 +140,7 @@ td{
     padding: 10px 0 0;
     color: #606266;
     font-size: 14px;
+    min-height: 60px;
 }
 
 .box-content .sq-input{
