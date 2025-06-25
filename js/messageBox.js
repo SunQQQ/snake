@@ -28,7 +28,7 @@ MessageBox.prototype.reloadScoreList = function(callback){
         scoreList = data.data.list,
         num = data.data.total,
         rankString = '',
-        userName = localStorage.getItem('snakeUserName') ? localStorage.getItem('snakeUserName') : ('游客' + num);
+        userName = localStorage.getItem("SunqBlog") ? JSON.parse(localStorage.getItem("SunqBlog")).userInfo.name : ('游客' + num);
 
       for(var i=0;i<scoreList.length;i++){
         rankString += ('<p><span class="user-name">' + scoreList[i].userName +
