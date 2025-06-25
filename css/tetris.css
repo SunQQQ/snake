@@ -108,7 +108,7 @@ td{
     align-items: center;
 }
 .wrapper .dialog-box{
-    width: 420px;
+    width: 380px;
     background-color: #fff;
     border: 1px solid #ebeef5;
     margin: 0 auto;
@@ -176,15 +176,21 @@ td{
 
 .box-btns .leave-Message{
     display: none;
-    background-color: #f56c6c;
-    border-color: #f56c6c;
-    color:#fff;
+    color: #f56c6c;
+    background: #fef0f0;
+    border-color: #fbc4c4;
 }
 
 .box-btns .conform{
-    background-color: #409eff !important;
-    color: #fff !important;
-    border: 1px solid #409eff !important;
+    color: #409eff;
+    background: #ecf5ff;
+    border-color: #b3d8ff;
+}
+
+.box-btns .adminUrl{
+    color: #67c23a;
+    background: #f0f9eb;
+    border-color: #c2e7b0;
 }
 
 .box-btns button:focus, .box-btns button:hover {
@@ -198,6 +204,18 @@ td{
     background-color: rgba(245, 108, 108, 0.7);
     border-color: rgba(245, 108, 108, 0.7);
     color:#fff;
+}
+
+.box-btns .adminUrl:focus, .box-btns .adminUrl:hover{
+    color: #fff;
+    background-color: #67c23a;
+    border-color: #67c23a;
+}
+
+.box-btns .conform:focus, .box-btns .conform:hover{
+    color: #fff;
+    background-color: #409eff;
+    border-color: #409eff;
 }
 
 .ranking p{

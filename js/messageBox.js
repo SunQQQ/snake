@@ -79,7 +79,7 @@ MessageBox.prototype.myAjax = function (para) {
 // 游戏结束后的弹框
 MessageBox.prototype.reloadGame = function (score,overReason) {
   var text = '您的得分是';
-  var text2 = '，看下榜单有没有你吧';
+  var text2 = '，看下英雄榜有没有你吧';
 
   // 显示弹框，隐藏掉输入框，修改掉部分文本
   document.getElementsByClassName('wrapper')[0].style.display = 'flex';
@@ -103,6 +103,9 @@ MessageBox.prototype.reloadGame = function (score,overReason) {
   };
   document.getElementsByClassName('conform')[0].onclick = function () {
     window.open('https://github.com/SunQQQ/snake');
+  };
+  document.getElementsByClassName('adminUrl')[0].onclick = function () {
+    window.open('https://codinglife.online/admin');
   };
   document.getElementsByClassName('skip')[0].onclick = function () {
     window.location.reload();
